@@ -127,7 +127,7 @@ function News() {
 
       <div className="flex flex-wrap justify-center m-5">
         {articles.map((article, index) => (
-          <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow flex flex-row justify-center align-top m-5">
+          <div key={index} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow flex flex-row justify-center align-top m-5">
             <div key={index}>
               {article.urlToImage ? (
                 <Image src={article.urlToImage} alt={article.title} width={500} height={300} className="w-full h-40 object-cover rounded-t-lg" />
