@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Image from 'next/image';
+// import Image from 'next/image';
+import { useSelector, useDispatch } from 'react-redux';
 
 function News() {
   const apiKey = "793d027de859456088f5f4915ccad5c7";
   const [articles, setArticles] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
+ // const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("us");
   const [isOpen, setIsOpen] = useState(false);
+  const selectedCategory = useSelector(state => state.category);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -27,13 +30,19 @@ function News() {
     if (selectedCategory === "" && selectedCountry === "us") {
       fetchNews();
     }
+    else {
+      fetchNews();
+    }
 
    
   }, [selectedCategory, selectedCountry])
-
   const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  }
+    dispatch({ type: 'SET_CATEGORY', payload: category });
+  };
+
+  // const handleCategoryChange = (category) => {
+  //   setSelectedCategory(category);
+  // }
 
   const handleCountryChange = (country) => {
     setSelectedCountry(country)
@@ -48,7 +57,7 @@ function News() {
 
       <div className="h-14 bg-gradient-to-r from-violet-500 to-fuchsia-500 flex justify-center align-top mb-20">
         <div className='absolute top-0'>
-          <Image src="https://cdn-icons-png.flaticon.com/128/4125/4125857.png" width={100} height={100} className='justify-center' alt='' />
+          <img src="https://cdn-icons-png.flaticon.com/128/4125/4125857.png" width={100} height={100} className='justify-center' alt='' />
 
         </div>
 
@@ -123,9 +132,9 @@ function News() {
           <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow flex flex-row justify-center align-top m-5">
             <div key={index}>
               {article.urlToImage ? (
-                <img src={article.urlToImage} alt={article.title} className="w-full h-40 object-cover rounded-t-lg" />
+                <img src={article.urlToImage} alt={article.title} width={500} height={300} className="w-full h-40 object-cover rounded-t-lg" />
               ) : (
-                <img src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png" alt={article.title} className="w-full h-40 object-cover rounded-t-lg" />
+                <img src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png" width={400} height={400} alt={article.title} className="w-full h-40 object-cover rounded-t-lg" />
               )}           <h1 className='uppercase text-center text-white bg-gradient-to-r from-violet-500 to-fuchsia-500 w-1/2'>{selectedCategory}</h1>
               <h1 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black'>{article.title}</h1>
               <h3 className='mb-3 font-normal text-gray-700 dark:text-gray-400'>{article.description}</h3>
@@ -144,6 +153,8 @@ function News() {
 
     </div>
   );
+
 }
+
 
 export default News;

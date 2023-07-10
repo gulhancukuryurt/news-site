@@ -5,6 +5,8 @@ import styles from '@/styles/Home.module.css'
 import News from '@/components/News'
 import Footer from '@/components/Footer'
 import TopButton from '@/components/TopButton'
+import { Provider } from 'react-redux'
+import store from '../store'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,9 +19,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Provider store={store}>
       <News/>
-      <TopButton/>
       <Footer/>
+      </Provider>
+     
+      <TopButton/>
+     
      
     </>
   )
