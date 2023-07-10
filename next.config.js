@@ -1,5 +1,10 @@
 module.exports = {
   images: {
-    domains: ['*'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*",
+      },
+    ],
   },
 };
