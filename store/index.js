@@ -1,6 +1,5 @@
 import { createStore } from 'redux';
 
-// Örnek reducer fonksiyonu
 const reducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_CATEGORY':
@@ -13,3 +12,4 @@ const reducer = (state = {}, action) => {
 const store = createStore(reducer);
 
 export default store;
+
